@@ -1,13 +1,13 @@
 #include "glew-utils.h"
 #include <cstdio>
 
-#include <GL/glew.h>
+#include "system-gl.h"
 
-bool initializeGlew() {
-  auto err = glewInit();
-  if (err != GLEW_OK) {
-    fprintf(stderr, "GLEW Error: %s\n", glewGetErrorString(err));
-    return false;
-  }
-  return true;
-}
+// bool initializeGlew() {
+//   auto err = glewInit();
+//   if (err != GLEW_OK) {
+//     fprintf(stderr, "GLEW Error: %s\n", glewGetErrorString(err));
+//     return false;
+//   }
+//   return true;
+// }

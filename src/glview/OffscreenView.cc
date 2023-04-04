@@ -48,9 +48,9 @@ OffscreenView::OffscreenView(uint32_t width, uint32_t height)
   if (!this->ctx->makeCurrent()) throw OffscreenViewException("Unable to make GL context current");
 
 #ifndef NULLGL
-  if (!initializeGlew()) {
-    throw OffscreenViewException("Unable to initialize Glew");
-  }
+  // if (!initializeGlew()) {
+  //   throw OffscreenViewException("Unable to initialize Glew");
+  // }
 
 #ifdef USE_GLAD
   // FIXME: We could ask for gladLoaderLoadGLES2() here instead
@@ -61,7 +61,7 @@ OffscreenView::OffscreenView(uint32_t width, uint32_t height)
   }
   // FIXME: Only if verbose
   LOG("GLAD: Loaded OpenGL %1$d.%2$d", GLAD_VERSION_MAJOR(version), GLAD_VERSION_MINOR(version));
-#endif
+#endif // USE_GLAD
 
 #endif // NULLGL
 

@@ -1,3 +1,3 @@
 #pragma once
 
-bool initializeGlew();
+//bool initializeGlew();

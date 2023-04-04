@@ -1,4 +1,4 @@
-set(USE_PBUFFER 1)
+set(USE_PBUFFER 0)
 if (USE_PBUFFER)
   set(PBUFFER_SOURCES
     submodules/OpenCSG/src/pBufferTexture.cpp
@@ -27,7 +27,18 @@ set(OPENCSG_SOURCES
 )
 
 add_library(OpenCSGObjects OBJECT ${OPENCSG_SOURCES})
+set_property(TARGET OpenCSGObjects PROPERTY CXX_STANDARD 17)
+if(APPLE)
+  target_compile_definitions(OpenCSGObjects PRIVATE GL_SILENCE_DEPRECATION)
+endif(APPLE)
+if(USE_GLAD)
+  target_compile_definitions(OpenCSGObjects PRIVATE USE_GLAD)
+else()
+  target_compile_definitions(OpenCSGObjects PRIVATE USE_GLEW)
+endif()
+
 target_include_directories(OpenCSGObjects PRIVATE OpenCSG submodules/OpenCSG submodules/OpenCSG/include)
+target_include_directories(OpenCSGObjects PRIVATE src/ext src/glview src/utils src/core)
 target_link_libraries(OpenCSGObjects PRIVATE GLEW::glew)
 
 add_library(OpenCSG INTERFACE)
