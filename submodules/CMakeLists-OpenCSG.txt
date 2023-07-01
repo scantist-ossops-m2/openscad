@@ -1,11 +1,3 @@
-set(USE_PBUFFER 0)
-if (USE_PBUFFER)
-  set(PBUFFER_SOURCES
-    submodules/OpenCSG/src/pBufferTexture.cpp
-    submodules/OpenCSG/RenderTexture/RenderTexture.cpp
-  )
-endif(USE_PBUFFER)    
-
 set(OPENCSG_SOURCES
   submodules/OpenCSG/src/area.cpp
   submodules/OpenCSG/src/batch.cpp
@@ -33,8 +25,6 @@ if(APPLE)
 endif(APPLE)
 if(USE_GLAD)
   target_compile_definitions(OpenCSGObjects PRIVATE USE_GLAD)
-else()
-  target_compile_definitions(OpenCSGObjects PRIVATE USE_GLEW)
 endif()
 
 target_include_directories(OpenCSGObjects PRIVATE OpenCSG submodules/OpenCSG submodules/OpenCSG/include)
