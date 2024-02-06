@@ -251,6 +251,7 @@ std::unique_ptr<Polygon2d> GeometryEvaluator::applyFill2D(const AbstractNode& no
 {
   // Merge and sanitize input geometry
   auto geometry_in = ClipperUtils::apply(collectChildren2D(node), ClipperLib::ctUnion);
+  assert(geometry_in->isSanitized());
 
   std::vector<std::shared_ptr<const Polygon2d>> newchildren;
   // Keep only the 'positive' outlines, eg: the outside edges
@@ -1052,6 +1053,7 @@ static Outline2d splitOutlineByFn(
  */
 static std::unique_ptr<Geometry> extrudePolygon(const LinearExtrudeNode& node, const Polygon2d& poly)
 {
+  assert(poly.isSanitized());
   bool non_linear = node.twist != 0 || node.scale_x != node.scale_y;
   boost::tribool isConvex{poly.is_convex()};
   // Twist or non-uniform scale makes convex polygons into unknown polyhedrons

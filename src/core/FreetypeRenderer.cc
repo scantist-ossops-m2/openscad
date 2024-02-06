@@ -564,5 +564,8 @@ std::vector<std::shared_ptr<const Polygon2d>> FreetypeRenderer::render(const Fre
     callback.finish_glyph();
   }
 
+  // FIXME: The returned Polygon2d currently contains only outlines with the 'positive' flag set to true,
+  // and where the winding order determines if the outlines should be interpreted as polygons or holes.
+  // We have to rely on any downstream processing to be aware of the winding order, and ignore the 'positive' flag.
   return callback.get_result();
 }
