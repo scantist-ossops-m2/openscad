@@ -656,13 +656,7 @@ Response GeometryEvaluator::visit(State& state, const TextNode& node)
   if (state.isPrefix()) {
     std::shared_ptr<const Geometry> geom;
     if (!isSmartCached(node)) {
-      auto geometrylist = node.createGeometryList();
-      std::vector<std::shared_ptr<const Polygon2d>> polygonlist;
-      for (const auto& geometry : geometrylist) {
-        const auto polygon = std::dynamic_pointer_cast<const Polygon2d>(geometry);
-        assert(polygon);
-        polygonlist.push_back(polygon);
-      }
+      auto polygonlist = node.createPolygonList();
       geom = ClipperUtils::apply(polygonlist, ClipperLib::ctUnion);
     } else {
       geom = GeometryCache::instance()->get(this->tree.getIdString(node));
