@@ -190,6 +190,9 @@ add_subdirectory(submodules)
 # The submodules will set up mimalloc if needed, and we need to defer any 
 # target_link_libraries() calls until after that.
 
+target_link_libraries(OpenSCAD PRIVATE Clipper2)
+target_include_directories(OpenSCAD SYSTEM PRIVATE "submodules/Clipper2/CPP/Clipper2Lib/include")
+
 if (MXECROSS)
   target_compile_definitions(OpenSCAD PRIVATE LIBXML_STATIC STATIC_QT_SVG_PLUGIN)
   target_compile_definitions(OpenSCAD PRIVATE GLEW_STATIC)
