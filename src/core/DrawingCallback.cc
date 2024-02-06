@@ -43,6 +43,7 @@ DrawingCallback::~DrawingCallback()
 void DrawingCallback::start_glyph()
 {
   this->polygon = std::make_shared<Polygon2d>();
+  // This is technically not true, since we don't maintain correct values for the 'positive' flag.
   this->polygon->setSanitized(true);
 }
 
