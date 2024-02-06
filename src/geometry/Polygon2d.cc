@@ -33,6 +33,8 @@ BoundingBox Outline2d::getBoundingBox() const {
    for positive outlines and clockwise for holes. Sanitization is typically
    done by ClipperUtils, but if you create geometry which you know is sanitized,
    the flag can be set manually.
+
+   TODO: Document semantics for overlapping contours
  */
 
 size_t Polygon2d::memsize() const
