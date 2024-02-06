@@ -61,7 +61,7 @@ void DrawingCallback::finish_glyph()
   }
 }
 
-std::vector<std::shared_ptr<const Geometry>> DrawingCallback::get_result()
+std::vector<std::shared_ptr<const Polygon2d>> DrawingCallback::get_result()
 {
   return this->polygons;
 }
