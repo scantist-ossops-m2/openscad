@@ -207,7 +207,7 @@ std::unique_ptr<Polygon2d> import_svg(double fn, double fs, double fa,
       }
     }
     libsvg_free(shapes);
-    return ClipperUtils::apply(polygons, ClipperLib::ctUnion);
+    return ClipperUtils::apply(polygons, Clipper2Lib::ClipType::Union);
   } catch (const std::exception& e) {
     LOG(message_group::Error, "%1$s, import() at line %2$d", e.what(), loc.firstLine());
     return std::make_unique<Polygon2d>();
