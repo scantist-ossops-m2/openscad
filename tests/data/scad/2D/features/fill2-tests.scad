@@ -1,6 +1,6 @@
 module convex2dSimple() {
     fill() {
-        translate([20,10]) circle(10);
+        translate([15,10]) circle(10);
         circle(10);
     }
 }
@@ -68,6 +68,7 @@ fill() polygon(
 );
 }
 
+translate([-40,0,0]) convex2dSimple();
 convex2dHole();
 translate([40,04,0]) enclaves();
 translate([0,-20,0]) someLetters();
