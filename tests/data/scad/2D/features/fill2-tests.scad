@@ -1,6 +1,6 @@
 module convex2dSimple() {
     fill() {
-        translate([15,10]) circle(10);
+        translate([20,10]) circle(10);
         circle(10);
     }
 }
@@ -54,9 +54,23 @@ module enclaves() {
       }
   }
 }
-  
+
+module polygonWithOverlappingHole() {
+fill() polygon(
+  points=[
+    [0,0], [20,0], [20,20], [0,20],
+    [10,10], [30,10], [30,30], [10,30],
+  ],
+  paths=[
+    [0,1,2,3],
+    [4,5,6,7],
+  ]
+);
+}
+
 convex2dHole();
 translate([40,04,0]) enclaves();
 translate([0,-20,0]) someLetters();
 fill2null();
 multiHole();
+translate([30,20,0]) polygonWithOverlappingHole();
