@@ -141,8 +141,7 @@ std::unique_ptr<Polygon2d> apply(const std::vector<Clipper2Lib::Paths64>& pathsv
       clipper.AddClip(pathsvector[i]);
       clipper.Execute(clipType, Clipper2Lib::FillRule::NonZero, result);
       if (i != pathsvector.size() - 1) {
-        // TODO: Rewrite this to Clipper2
-//        Clipper2Lib::PolyTree64ToPaths64(result, source);
+        source = Clipper2Lib::PolyTreeToPaths64(result);
         clipper.Clear();
       }
     }
@@ -176,7 +175,7 @@ std::unique_ptr<Polygon2d> apply(const std::vector<std::shared_ptr<const Polygon
 				 Clipper2Lib::ClipType clipType)
 {
   BoundingBox bounds;
-  for (auto polygon : polygons) {
+  for (const auto &polygon : polygons) {
     if (polygon) bounds.extend(polygon->getBoundingBox());
   }
   int pow2 = ClipperUtils::getScalePow2(bounds);
@@ -186,12 +185,9 @@ std::unique_ptr<Polygon2d> apply(const std::vector<std::shared_ptr<const Polygon
     if (polygon) {
       auto polypaths = fromPolygon2d(*polygon, pow2);
       if (!polygon->isSanitized()) {
-        // TODO: Rewrite this to Clipper2
-//        Clipper2Lib::PolyTree64ToPaths(sanitize(polypaths), polypaths);
+        polypaths = Clipper2Lib::PolyTreeToPaths64(*sanitize(polypaths));
       }
-      pathsvector.push_back(polypaths);
-    } else {
-      pathsvector.emplace_back();
+      pathsvector.push_back(std::move(polypaths));
     }
   }
   auto res = apply(pathsvector, clipType, pow2);

@@ -1452,7 +1452,6 @@ std::shared_ptr<const Geometry> GeometryEvaluator::projectionNoCut(const Project
   return geom;
 }
 
-
 /*!
    input: List of 3D objects
    output: Polygon2d

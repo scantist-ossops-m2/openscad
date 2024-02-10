@@ -203,7 +203,7 @@ std::unique_ptr<Polygon2d> import_svg(double fn, double fs, double fa,
           }
           poly->addOutline(outline);
         }
-        polygons.push_back(poly);
+        if (!poly->isEmpty()) polygons.push_back(poly);
       }
     }
     libsvg_free(shapes);
