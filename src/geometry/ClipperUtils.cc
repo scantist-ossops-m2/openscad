@@ -188,6 +188,9 @@ std::unique_ptr<Polygon2d> apply(const std::vector<std::shared_ptr<const Polygon
         polypaths = Clipper2Lib::PolyTreeToPaths64(*sanitize(polypaths));
       }
       pathsvector.push_back(std::move(polypaths));
+    } else {
+      // Insert empty object as this could be the positive object in a difference
+      pathsvector.emplace_back();
     }
   }
   auto res = apply(pathsvector, clipType, pow2);
