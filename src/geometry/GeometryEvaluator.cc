@@ -45,7 +45,7 @@ class Geometry;
 class Polygon2d;
 class Tree;
 
-GeometryEvaluator::GeometryEvaluator(const Tree& tree) : tree(tree) { }
+GeometryEvaluator::GeometryEvaluator(const Tree& tree, GeometryEngine engine) : tree(tree), engine(engine) { }
 
 /*!
    Set allownef to false to force the result to _not_ be a Nef polyhedron
@@ -158,7 +158,7 @@ GeometryEvaluator::ResultObject GeometryEvaluator::applyToChildren3D(const Abstr
     if (actualchildren.empty()) return {};
     if (actualchildren.size() == 1) return ResultObject::constResult(actualchildren.front().second);
 #ifdef ENABLE_MANIFOLD
-    if (Feature::ExperimentalManifold.is_enabled()) {
+    if (useManifold()) {
       return ResultObject::mutableResult(ManifoldUtils::applyOperator3DManifold(actualchildren, op));
     }
 #endif
@@ -175,7 +175,7 @@ GeometryEvaluator::ResultObject GeometryEvaluator::applyToChildren3D(const Abstr
   default:
   {
 #ifdef ENABLE_MANIFOLD
-    if (Feature::ExperimentalManifold.is_enabled()) {
+    if (useManifold()) {
       return ResultObject::mutableResult(ManifoldUtils::applyOperator3DManifold(children, op));
     }
 #endif
@@ -939,7 +939,7 @@ std::shared_ptr<const Geometry> GeometryEvaluator::projectionCut(const Projectio
   std::shared_ptr<const Geometry> newgeom = applyToChildren3D(node, OpenSCADOperator::UNION).constptr();
   if (newgeom) {
 #ifdef ENABLE_MANIFOLD
-    if (Feature::ExperimentalManifold.is_enabled()) {
+    if (useManifold()) {
       auto manifold = ManifoldUtils::createManifoldFromGeometry(newgeom);
       auto poly2d = manifold->slice();
       return std::shared_ptr<const Polygon2d>(ClipperUtils::sanitize(poly2d));
@@ -962,7 +962,7 @@ std::shared_ptr<const Geometry> GeometryEvaluator::projectionCut(const Projectio
 std::shared_ptr<const Geometry> GeometryEvaluator::projectionNoCut(const ProjectionNode& node)
 {
 #ifdef ENABLE_MANIFOLD
-  if (Feature::ExperimentalManifold.is_enabled()) {
+  if (useManifold()) {
     std::shared_ptr<const Geometry> newgeom = applyToChildren3D(node, OpenSCADOperator::UNION).constptr();
     if (newgeom) {
         auto manifold = ManifoldUtils::createManifoldFromGeometry(newgeom);

@@ -28,52 +28,49 @@ public slots:
   void actionTriggered(class QAction *);
   void featuresCheckBoxToggled(bool);
   void on_stackedWidget_currentChanged(int);
+
+  //
+  // 3D View tab
+  //
   void on_colorSchemeChooser_itemSelectionChanged();
-  void on_fontChooser_currentFontChanged(const QFont&);
-  void on_fontSize_currentIndexChanged(int);
-  void on_syntaxHighlight_textActivated(const QString & s);
-  void on_openCSGWarningBox_toggled(bool);
-  void on_cgalCacheSizeMBEdit_textChanged(const QString&);
-  void on_polysetCacheSizeMBEdit_textChanged(const QString&);
-  void on_opencsgLimitEdit_textChanged(const QString&);
-  void on_forceGoldfeatherBox_toggled(bool);
-  void on_mouseWheelZoomBox_toggled(bool);
-  void on_localizationCheckBox_toggled(bool);
-  void on_autoReloadRaiseCheckBox_toggled(bool);
-  void on_updateCheckBox_toggled(bool);
-  void on_snapshotCheckBox_toggled(bool);
-  void on_reorderCheckBox_toggled(bool);
-  void on_undockCheckBox_toggled(bool);
-  void on_checkNowButton_clicked();
-  void on_launcherBox_toggled(bool);
-  void on_enableSoundOnRenderCompleteCheckBox_toggled(bool);
-  void on_enableHardwarningsCheckBox_toggled(bool);
-  void on_traceDepthEdit_textChanged(const QString&);
-  void on_enableTraceUsermoduleParametersCheckBox_toggled(bool);
-  void on_enableParameterCheckBox_toggled(bool);
-  void on_enableRangeCheckBox_toggled(bool);
-  void on_useAsciiSTLCheckBox_toggled(bool);
-  void on_comboBoxToolbarExport3D_activated(int);
-  void on_comboBoxToolbarExport2D_activated(int);
-  void on_checkBoxSummaryCamera_toggled(bool);
-  void on_checkBoxSummaryArea_toggled(bool);
-  void on_checkBoxSummaryBoundingBox_toggled(bool);
-  void on_enableHidapiTraceCheckBox_toggled(bool);
   void on_checkBoxShowWarningsIn3dView_toggled(bool);
   void on_checkBoxMouseCentricZoom_toggled(bool);
   void on_checkBoxMouseSwapButtons_toggled(bool);
-  void on_timeThresholdOnRenderCompleteSoundEdit_textChanged(const QString&);
-  void on_enableClearConsoleCheckBox_toggled(bool);
-  void on_consoleMaxLinesEdit_textChanged(const QString&);
-  void on_consoleFontChooser_currentFontChanged(const QFont&);
-  void on_consoleFontSize_currentIndexChanged(int);
-  void on_customizerFontChooser_currentFontChanged(const QFont&);
-  void on_customizerFontSize_currentIndexChanged(int);
-  void on_checkBoxEnableAutocomplete_toggled(bool);
-  void on_lineEditCharacterThreshold_textChanged(const QString&);
+
   //
-  // editor settings
+  // Preview and Render tab
   //
+  void on_comboBox_geometryEngine_activated(int);
+
+  // Preview
+  void on_openCSGWarningBox_toggled(bool);
+  void on_opencsgLimitEdit_textChanged(const QString&);
+  void on_forceGoldfeatherBox_toggled(bool);
+
+  // Caches
+  void on_cgalCacheSizeMBEdit_textChanged(const QString&);
+  void on_polysetCacheSizeMBEdit_textChanged(const QString&);
+
+  // Render summary
+  void on_checkBoxSummaryCamera_toggled(bool);
+  void on_checkBoxSummaryArea_toggled(bool);
+  void on_checkBoxSummaryBoundingBox_toggled(bool);
+
+
+  //
+  // Update tab
+  //
+  void on_updateCheckBox_toggled(bool);
+  void on_snapshotCheckBox_toggled(bool);
+  void on_checkNowButton_clicked();
+
+  //
+  // Editor tab
+  //
+  void on_fontChooser_currentFontChanged(const QFont&);
+  void on_fontSize_currentIndexChanged(int);
+  void on_syntaxHighlight_textActivated(const QString & s);
+  void on_mouseWheelZoomBox_toggled(bool);
 
   // Indentation
   void on_checkBoxAutoIndent_toggled(bool);
@@ -91,15 +88,24 @@ public slots:
   void on_spinBoxLineWrapIndentationIndent_valueChanged(int);
   void on_comboBoxLineWrapVisualizationStart_activated(int);
   void on_comboBoxLineWrapVisualizationEnd_activated(int);
-  void on_comboBoxModifierNumberScrollWheel_activated(int);
-
 
   // Display
   void on_checkBoxHighlightCurrentLine_toggled(bool);
   void on_checkBoxEnableBraceMatching_toggled(bool);
   void on_checkBoxEnableLineNumbers_toggled(bool);
 
-  // Print
+  // Number scroll
+  void on_lineEditStepSize_textChanged(const QString& arg1);
+  void on_checkBoxEnableNumberScrollWheel_toggled(bool checked);
+  void on_comboBoxModifierNumberScrollWheel_activated(int);
+
+  // Autocomplete
+  void on_checkBoxEnableAutocomplete_toggled(bool);
+  void on_lineEditCharacterThreshold_textChanged(const QString&);
+
+  //
+  // 3D Print tab
+  //
   void on_pushButtonOctoPrintCheckConnection_clicked();
   void on_pushButtonOctoPrintSlicingEngine_clicked();
   void on_comboBoxOctoPrintSlicingEngine_activated(int);
@@ -110,6 +116,44 @@ public slots:
   void on_lineEditOctoPrintURL_editingFinished();
   void on_lineEditOctoPrintApiKey_editingFinished();
   void on_pushButtonOctoPrintApiKey_clicked();
+
+  //
+  // Advanced tab
+  //
+
+  // User Interface
+  void on_reorderCheckBox_toggled(bool);
+  void on_undockCheckBox_toggled(bool);
+  void on_launcherBox_toggled(bool);
+  void on_localizationCheckBox_toggled(bool);
+  void on_autoReloadRaiseCheckBox_toggled(bool);
+  void on_enableSoundOnRenderCompleteCheckBox_toggled(bool);
+  void on_timeThresholdOnRenderCompleteSoundEdit_textChanged(const QString&);
+
+  // Console
+  void on_enableClearConsoleCheckBox_toggled(bool);
+  void on_consoleMaxLinesEdit_textChanged(const QString&);
+  void on_consoleFontChooser_currentFontChanged(const QFont&);
+  void on_consoleFontSize_currentIndexChanged(int);
+
+  // Customizer
+  void on_customizerFontChooser_currentFontChanged(const QFont&);
+  void on_customizerFontSize_currentIndexChanged(int);
+
+  // OpenSCAD Language Features
+  void on_enableHardwarningsCheckBox_toggled(bool);
+  void on_enableRangeCheckBox_toggled(bool);
+  void on_enableParameterCheckBox_toggled(bool);
+  void on_traceDepthEdit_textChanged(const QString&);
+  void on_enableTraceUsermoduleParametersCheckBox_toggled(bool);
+
+  // Export Features
+  void on_useAsciiSTLCheckBox_toggled(bool);
+  void on_comboBoxToolbarExport3D_activated(int);
+  void on_comboBoxToolbarExport2D_activated(int);
+
+  // Debugging
+  void on_enableHidapiTraceCheckBox_toggled(bool);
 
 signals:
   void requestRedraw() const;
@@ -131,9 +175,6 @@ signals:
   void toolbarExportChanged() const;
 
 private slots:
-  void on_lineEditStepSize_textChanged(const QString& arg1);
-
-  void on_checkBoxEnableNumberScrollWheel_toggled(bool checked);
 
 private:
   Preferences(QWidget *parent = nullptr);

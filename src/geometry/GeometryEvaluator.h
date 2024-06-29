@@ -20,7 +20,7 @@ class Tree;
 class GeometryEvaluator : public NodeVisitor
 {
 public:
-  GeometryEvaluator(const Tree& tree);
+  GeometryEvaluator(const Tree& tree, GeometryEngine engine = GeometryEngine::MANIFOLD);
 
   std::shared_ptr<const Geometry> evaluateGeometry(const AbstractNode& node, bool allownef);
 
@@ -99,8 +99,11 @@ private:
   void addToParent(const State& state, const AbstractNode& node, const std::shared_ptr<const Geometry>& geom);
   Response lazyEvaluateRootNode(State& state, const AbstractNode& node);
 
+  bool useManifold() const { return this->engine == GeometryEngine::MANIFOLD; }
+
   std::map<int, Geometry::Geometries> visitedchildren;
   const Tree& tree;
+  const GeometryEngine engine;
   std::shared_ptr<const Geometry> root;
 
 public:

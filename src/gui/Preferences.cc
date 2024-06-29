@@ -137,6 +137,7 @@ void Preferences::init() {
   // Toolbar
   auto *group = new QActionGroup(this);
   addPrefPage(group, prefsAction3DView, page3DView);
+  addPrefPage(group, prefsActionPreviewAndRender, pagePreviewAndRender);
   addPrefPage(group, prefsActionEditor, pageEditor);
 #ifdef OPENSCAD_UPDATER
   addPrefPage(group, prefsActionUpdate, pageUpdate);
@@ -1105,4 +1106,9 @@ void Preferences::updateGUIFontSize(QComboBox *fsSelector, const QString &settin
   } else {
     BlockSignals<QComboBox *>(fsSelector)->setEditText(fontsize);
   }
+}
+
+void Preferences::on_comboBox_geometryEngine_activated(int val)
+{
+  applyComboBox(comboBoxLineWrap, val, Settings::Settings::lineWrap); 
 }

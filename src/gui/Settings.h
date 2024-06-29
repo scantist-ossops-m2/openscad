@@ -160,6 +160,7 @@ public:
   static SettingsEntryBool showWarningsIn3dView;
   static SettingsEntryBool mouseCentricZoom;
   static SettingsEntryBool mouseSwapButtons;
+  static SettingsEntryEnum geometryEngine;
   static SettingsEntryInt indentationWidth;
   static SettingsEntryInt tabWidth;
   static SettingsEntryEnum lineWrap;

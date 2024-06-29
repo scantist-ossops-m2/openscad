@@ -10,3 +10,8 @@ enum class OpenSCADOperator {
   FILL,
   RESIZE
 };
+
+enum class GeometryEngine {
+  MANIFOLD,
+  CGAL,
+};
