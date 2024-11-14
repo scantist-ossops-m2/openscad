@@ -63,7 +63,7 @@ PACKAGES=(
     "opencsg 1.6.0"
     "qscintilla 2.13.3"
     "onetbb 2021.12.0"
-    "manifold 22c66051dfdbcefa2012e30dd12c9b5a20f89a01"
+    "manifold 66bca6e3fdfce0f590ca84edc1a6256502636f4b"
 )
 DEPLOY_PACKAGES=(
     "sparkle 1.27.1"
