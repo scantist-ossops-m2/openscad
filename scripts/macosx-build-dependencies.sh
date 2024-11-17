@@ -63,7 +63,7 @@ PACKAGES=(
     "opencsg 1.6.0"
     "qscintilla 2.13.3"
     "onetbb 2021.12.0"
-    "manifold 66bca6e3fdfce0f590ca84edc1a6256502636f4b"
+    "manifold 0b957bf8df4c1fd9b27169ab4a5dffdb93723438"
 )
 DEPLOY_PACKAGES=(
     "sparkle 1.27.1"
@@ -867,18 +867,19 @@ build_cairo()
 
 build_manifold()
 {
-  version=$1
+  version=cmake-refactor
   cd $BASEDIR/src
   rm -rf "manifold-$version"
   if [ ! -f "manifold-$version.zip" ]; then
-    curl -L https://github.com/elalish/manifold/archive/$version.zip -o manifold-$version.zip
+    curl -L https://github.com/pca006132/manifold/archive/refs/heads/cmake-refactor.zip -o manifold-$version.zip
+#    curl -L https://github.com/elalish/manifold/archive/$version.zip -o manifold-$version.zip
   fi
   unzip "manifold-$version.zip"
   cd "manifold-$version"
 
   mkdir build
   cd build
-  cmake -DCMAKE_INSTALL_PREFIX=$DEPLOYDIR -DCMAKE_OSX_DEPLOYMENT_TARGET="$MAC_OSX_VERSION_MIN" -DCMAKE_OSX_ARCHITECTURES="$ARCHS_COMBINED" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DMANIFOLD_CBIND=OFF -DMANIFOLD_TEST=OFF -DMANIFOLD_PAR=TBB ..
+  cmake -DCMAKE_INSTALL_PREFIX=$DEPLOYDIR -DCMAKE_OSX_DEPLOYMENT_TARGET="$MAC_OSX_VERSION_MIN" -DCMAKE_OSX_ARCHITECTURES="$ARCHS_COMBINED" -DMANIFOLD_CBIND=OFF -DMANIFOLD_TEST=OFF -DMANIFOLD_PAR=ON ..
   make -j$NUMCPU
   make install
 }
