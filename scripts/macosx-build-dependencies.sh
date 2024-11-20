@@ -63,7 +63,7 @@ PACKAGES=(
     "opencsg 1.6.0"
     "qscintilla 2.13.3"
     "onetbb 2021.12.0"
-    "manifold 0b957bf8df4c1fd9b27169ab4a5dffdb93723438"
+    "manifold 3.0.0"
 )
 DEPLOY_PACKAGES=(
     "sparkle 1.27.1"
@@ -867,14 +867,12 @@ build_cairo()
 
 build_manifold()
 {
-  version=cmake-refactor
   cd $BASEDIR/src
   rm -rf "manifold-$version"
-  if [ ! -f "manifold-$version.zip" ]; then
-    curl -L https://github.com/pca006132/manifold/archive/refs/heads/cmake-refactor.zip -o manifold-$version.zip
-#    curl -L https://github.com/elalish/manifold/archive/$version.zip -o manifold-$version.zip
+  if [ ! -f "manifold-$version.tar.gz" ]; then
+    curl -LO https://github.com/elalish/manifold/releases/download/v$version/manifold-$version.tar.gz
   fi
-  unzip "manifold-$version.zip"
+  tar xzf "manifold-$version.tar.gz"
   cd "manifold-$version"
 
   mkdir build
