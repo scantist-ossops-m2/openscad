@@ -57,7 +57,7 @@ PACKAGES=(
     "lib3mf 2.3.1"
     "glib2 2.81.0"
     "pixman 0.42.2"
-    "cairo 1.18.0"
+    "cairo 1.18.2"
     "cgal 6.0"
     "qt5 5.15.13"
     "opencsg 1.6.0"
@@ -843,7 +843,7 @@ build_cairo()
   # Build each arch separately
   for arch in ${ARCHS[*]}; do
     sed -e "s,@MAC_OSX_VERSION_MIN@,$MAC_OSX_VERSION_MIN,g" -e "s,@DEPLOYDIR@,$DEPLOYDIR,g" $OPENSCADDIR/scripts/macos-$arch.txt.in > macos-$arch.txt
-    meson setup --prefix $DEPLOYDIR --cross-file macos-$arch.txt -Dfreetype=enabled -Dfontconfig=enabled -Dxlib=disabled -Dxcb=disabled -Dpng=disabled -Dglib=disabled -Dtests=disabled -Dquartz=disabled build-$arch
+    meson setup --prefix $DEPLOYDIR --cross-file macos-$arch.txt -Dfreetype=enabled -Dfontconfig=disabled -Dxlib=disabled -Dxcb=disabled -Dpng=disabled -Dglib=disabled -Dtests=disabled -Dquartz=disabled build-$arch
     meson compile -C build-$arch
     DESTDIR=install/ meson install -C build-$arch
   done
